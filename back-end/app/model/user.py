@@ -5,6 +5,7 @@ class User(Base):
     schoolid = db.Column(db.Integer)
     username = db.Column(db.String(255))
     password = db.Column(db.String(255))
+    sessionno = db.Column(db.String(50))
 
     def __init__(self, username):
         self.username=username
