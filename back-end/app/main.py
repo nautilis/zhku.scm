@@ -1,9 +1,13 @@
+# -*- coding: utf8 -*-
 from flask import Flask
+from flask_cors import CORS
 from app.config import DevConfig
 
 #app 
 app = Flask(__name__)
+CORS(app)
 app.config.from_object(DevConfig)
+
 __all__ = ['app', 'db','Base']
 
 # db

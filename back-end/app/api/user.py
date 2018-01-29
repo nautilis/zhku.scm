@@ -1,7 +1,9 @@
-from flask import Flask, jsonify, Blueprint, request
+#-*-coding: utf8 -*-
+from flask import Flask, jsonify, Blueprint, request, make_response
 import time
 from app.model.user import User
 user_api = Blueprint('user_api', __name__)
+import json
 
 @user_api.route('/hello', methods=['GET'])
 def hello_world():
@@ -11,12 +13,17 @@ def hello_world():
 
 @user_api.route('/', methods=['POST'])
 def create():
-    schoolid = request.form['schoolid']
-    password = request.form['password']
+    data = request.get_data()
+    print data
+    jobj = json.loads(data)
+    schoolid = jobj['schoolid']
+    password = jobj['password']
+ 
     print (schoolid, password)
     existed_user = User.find_user_by_schoolid(schoolid)
     if existed_user:
-        return jsonify({"status": "200", "error": "1", "message":"schoolid had existed"})
+        return  jsonify({"status": "200", "error": "1", "message": "学号已经注册过"})
+ 
     else:
         user = User()
         user.schoolid = schoolid
@@ -26,7 +33,6 @@ def create():
         user.sessionno = year
         result = User.create_user(user)
         if result == 1:
-            return jsonify({'status': "200", "error":"0", "message":"success"})
+            return jsonify({"status": "200", "error":"0", "message":"注册成功，现在可以登录了",})
         else:
-            return jsonify({"status": "200", "error": "1", "message": ""})
-
+            return jsonify({"status": "200", "error": "1", "message": "未知错误",})
