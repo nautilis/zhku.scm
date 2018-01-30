@@ -1,8 +1,12 @@
-.sign{
+.menu{
     float: right;
 }
 
 .logo img{
     height: 50px;
     width: 50px;
+}
+
+.menu-icon{
+    font-size: 25px;
 }
