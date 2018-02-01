@@ -31,7 +31,10 @@ export default class TestComponent extends React.Component{
 
   render(){
     return(
+      <div>
+        <h1>this is test</h1>
       <Button onClick={this.handleClick.bind(this)}>Test</Button>
+      </div>
     );
   }
 }

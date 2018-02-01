@@ -12,7 +12,9 @@ import {
   message,
 } from 'antd';
 import { Link } from 'react-router-dom'
+import Header from 'antd/lib/calendar/Header';
 var css = require("../../css/header.css")
+import {withRouter  } from 'react-router-dom';
 
 const TabPane = Tabs.TabPane;
 const FormItem = Form.Item;
@@ -45,6 +47,7 @@ class HeaderComponent extends React.Component {
 
   showModal(type) {
     console.log("on show modal");
+    console.log(this.props.history);
     if (type == "register") {
       this.setState({ registerVisible: true });
     } else if (type == "login") {
@@ -119,6 +122,7 @@ class HeaderComponent extends React.Component {
           logined: true,
           token: json.token,
         });
+      
       }
     });
 
@@ -142,6 +146,7 @@ class HeaderComponent extends React.Component {
     });
     this.setState({logined: false});
     localStorage.removeItem('scm-token');
+    this.props.history.replace("/");
 
   }
 
@@ -150,7 +155,7 @@ class HeaderComponent extends React.Component {
     const userShow = this.state.logined ?
       <Menu mode="horizontal" className="menu">
         <Menu.Item key="userinfo" >
-          <span><a href="#"><Icon type="user" className="menu-icon" /></a></span>
+          <span><Link to="/setting/profile"><Icon type="user" className="menu-icon" /></Link></span>
         </Menu.Item>
         <Menu.Item key="logout">
           <span><Icon type="poweroff" className="menu-icon" onClick={this.loginOut.bind(this)}/></span>
@@ -223,17 +228,17 @@ class HeaderComponent extends React.Component {
     return (
       <header>
         <Row>
-          <Col span={2} />
-          <Col span={4}>
+          <Col span={4} />
+          <Col span={6}>
             <a href="/" className="logo"><img src="./src/images/logo.png" /></a>
-            <span>仲恺校园社团管理系统</span>
+            <span className="site-name">仲恺校园社团管理系统</span>
           </Col>
-          <Col span={16}>
+          <Col span={10}>
 
             {userShow}
 
           </Col>
-          <Col span={2} />
+          <Col span={4} />
         </Row>
         {registerModal}
         {loginModal}
@@ -242,4 +247,5 @@ class HeaderComponent extends React.Component {
   }
 }
 
-export default HeaderComponent = Form.create({})(HeaderComponent);
+ HeaderComponent = Form.create({})(HeaderComponent);
+ export default withRouter(HeaderComponent);

@@ -1,0 +1,21 @@
+.setting{
+    margin-top: 40px;
+}
+.setting .setting-menu{
+    margin-right: 50px;
+}
+i.man{
+    color: blue;
+}
+
+i.woman{
+    color: red;
+}
+
+.info-form{
+    margin-left: 10px;
+}
+
+.setting .middle-input{
+    width: 500px;
+}
