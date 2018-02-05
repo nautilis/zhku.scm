@@ -145,6 +145,7 @@ class HeaderComponent extends React.Component {
       }
     });
     this.setState({logined: false});
+    message.success("你已退出")
     localStorage.removeItem('scm-token');
     this.props.history.replace("/");
 
