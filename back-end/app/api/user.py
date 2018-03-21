@@ -5,7 +5,9 @@ from app.model.user import User
 user_api = Blueprint('user_api', __name__)
 import json
 from app.helps.somedangerous import get_token, logined_token_required
+from app.helps.common import random_str
 import time
+import os
 
 
 @user_api.route('/hello', methods=['GET'])
@@ -82,11 +84,68 @@ def logout(user):
     res = {"status": "ok", "error": "0", "message": "你已经退出"}
     return jsonify(res)
 
-
-@user_api.route("/test", methods=['GET', 'POST'])
+@user_api.route('/info', methods=['GET', 'POST'])
 @logined_token_required
-def test_token_required(user):
-    return jsonify({"status":"ok", "user": user.schoolid})
+def update_base_info(user):
+    "update gender, username, campus, bio, email"
+
+    if request.method == "GET":
+        print "get method"
+        data = {"gender": user.gender, 
+        "username": user.username, 
+        "campus": user.campus,
+         "bio": user.bio, 
+         "email": user.email,
+         "avatar_path": "http://127.0.0.1:5000/static"  + user.avatar
+         }
+        res = {"status": "ok", "error": "0", "message": "success", "user": data}
+        return jsonify(res)
+    else:
+        data = request.get_data()
+        print "on api " +  data
+        jobj = json.loads(data)
+        user.gender = jobj['gender']
+        user.email = jobj['email']
+        user.bio = jobj['bio']
+        user.username = jobj['username']
+        user.campus = jobj['campus']
+        
+        try: 
+            User.update_base_info(user)
+        except:
+            res = {"satus": "fail", "error": "1", "message": "服务器错误"}
+            return jsonify(res)
+
+        res = {"status": "ok", "error": "0", "message": "用户信息更新成功"}
+        print res
+        return jsonify(res)
+
+@user_api.route('/avatar', methods=['POST'])
+@logined_token_required
+def update_avatar(user):
+    data = request.get_data()
+    file = request.files['avatar']
+
+    avatar_path = user.avatar # 原理的图片位置
+
+    path = os.path.abspath(os.path.dirname(__file__)) + "/../static/uploads/avatar"
+    if not os.path.exists(path):
+        os.makedirs(path)
+
+    if not avatar_path:
+        fielname = random_str(16) + ".jpg"
+        location = path + "/" + fielname
+    else:
+        location = os.path.abspath(os.path.dirname(__file__)) + "/../static" + avatar_path
+
+    print location
+    file.save(location)
+    store_location = location.split("/static").pop()
+    User.update_avatar(user, store_location)
+
+    res = {"status": "ok", "error": "0", "message": "图片上传成功"}
+    return jsonify(res)
+
         
 
         

@@ -9,7 +9,7 @@ import time
 
 
 
-def get_token(data={}, expiration=1440*31*60):
+def get_token(data={}, expiration=3600*31*24):
     s = Serializer(DevConfig.SECRET_KEY, expires_in=expiration)
     return s.dumps(data)  
 
@@ -18,9 +18,12 @@ def logined_token_required(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
         token = request.headers.get('Authorization')
+        if not token:
+            token = request.args.get("token")
+        print request.get_data()
         print ("token===>", token)
         if not token:
-            return jsonify({'status': 'fail', 'error': '', "message": "您已经退出"})
+            return jsonify({'status': 'fail', 'error': '1', "message": "您已经退出"})
 
         s = Serializer(DevConfig.SECRET_KEY)
         try:

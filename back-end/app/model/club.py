@@ -1,0 +1,40 @@
+#-*- coding: utf-8 -*-
+from app.main  import db, Base
+import time
+
+class Club(Base):
+    cid = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255))
+    chairman = db.Column(db.String(255))
+    memberno = db.Column(db.Integer)
+    avatar = db.Column(db.String(1024))
+
+    def __init__(self):
+        pass
+
+    def __repr__(self):
+        return "<Club `{}`>".format(self.name)
+
+    @classmethod
+    def get_all_clubs(cls):
+        clubs = cls.query.all()
+        return clubs
+
+    @classmethod
+    def find_club_by_id(cls, clubid):
+        club = cls.query.filter_by(cid=clubid).first()
+        return club
+
+    @classmethod
+    def update_club_info(cls, clubid, club):
+        cls.query.filter_by(cid=clubid).update({
+            "name": club.name,
+            "chairman": club.chairman
+        })       
+        db.session.commit()
+
+
+class ClubAdmin(Base):
+    caid = db.Column(db.Integer, primary_key=True)
+    cid = db.Column(db.Integer)
+    uid = db.Column(db.Integer)
