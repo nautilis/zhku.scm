@@ -2,6 +2,7 @@
 from flask import Flask, jsonify, Blueprint, request, make_response
 import time
 from app.model.user import User
+from app.model.admin_club import AdminClub
 user_api = Blueprint('user_api', __name__)
 import json
 from app.helps.somedangerous import get_token, logined_token_required
@@ -146,6 +147,26 @@ def update_avatar(user):
     res = {"status": "ok", "error": "0", "message": "图片上传成功"}
     return jsonify(res)
 
+@user_api.route('/clubs', methods=['GET'])
+@logined_token_required
+def get_user_club_info(user):
+    clubs = User.get_all_clubs(user)
+    res = {}
+    res["user"] = user.to_dict()
+    res["clubs"] = []
+    for ind, club in enumerate(clubs):
+        c_dict = club.to_dict()
+        if AdminClub.is_admin(user.uid, club.cid):
+            c_dict['is_admin'] = '1'
+        else:
+            c_dict['is_admin'] = '0'
+        res['clubs'].append(c_dict)
+
+    res['status'] = 'ok'
+    res['message'] = ''
+    res['error'] = 0
+
+    return jsonify(res)        
         
 
         

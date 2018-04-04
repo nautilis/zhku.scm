@@ -12,7 +12,7 @@ __all__ = ['app', 'db','Base']
 
 # db
 from flask_sqlalchemy import SQLAlchemy
-db = SQLAlchemy(app,use_native_unicode="utf8")
+db = SQLAlchemy(app)
 
 #Base db
 class Base(db.Model):

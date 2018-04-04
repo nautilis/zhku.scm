@@ -21,9 +21,14 @@ class Club(Base):
         return clubs
 
     @classmethod
-    def find_club_by_id(cls, clubid):
-        club = cls.query.filter_by(cid=clubid).first()
+    def find_club_by_id(cls, clubids):
+        club = cls.query.filter_by(cid=clubids).first()
         return club
+
+    @classmethod
+    def find_clubs_by_ids(cls, clubids):
+        clubs = cls.query.filter(cls.cid.in_(clubids)).all()
+        return clubs
 
     @classmethod
     def update_club_info(cls, clubid, club):
@@ -33,8 +38,3 @@ class Club(Base):
         })       
         db.session.commit()
 
-
-class ClubAdmin(Base):
-    caid = db.Column(db.Integer, primary_key=True)
-    cid = db.Column(db.Integer)
-    uid = db.Column(db.Integer)

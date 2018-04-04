@@ -3,6 +3,7 @@ import ReactDom from 'react-dom';
 import HeaderComponent from './components/header-component';
 import UserCenterComponent from './components/user-center/user-center-component';
 import ClubAdminComponent from './components/club-admin/club-admin-component';
+import UserProfileComponent from './components/user-profile/user-profile-component';
 import TestComponent from './components/test-component'
 import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import {auth} from './fetch/login-auth';
@@ -22,6 +23,7 @@ export default class App extends React.Component {
           <HeaderComponent />
           <PrivateRoute authed={auth.loginAuth} path="/setting" component={UserCenterComponent} />
           <PrivateRoute authed={auth.loginAuth} path="/club/:cid/admin" component={ClubAdminComponent} />
+          <PrivateRoute authed={auth.loginAuth} path="/profile" component={UserProfileComponent}/>
           <Link to="/club/1/admin">管理社团</Link>
         </div>
       </Router>

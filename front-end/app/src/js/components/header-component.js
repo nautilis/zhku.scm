@@ -10,6 +10,7 @@ import {
   Form,
   Input,
   message,
+  Dropdown,
 } from 'antd';
 import { Link } from 'react-router-dom'
 import Header from 'antd/lib/calendar/Header';
@@ -152,15 +153,22 @@ class HeaderComponent extends React.Component {
   }
 
   render() {
+    const usermenu =  (
+      <Menu>
+        <Menu.Item>
+        <Link to="/setting/profile" className="ant-dropdown-link" >设置</Link>
+        </Menu.Item>
+        <Menu.Item>
+          <a onClick={this.loginOut.bind(this)} href="#">退出</a>
+        </Menu.Item>
+      </Menu>
+    );
     const { getFieldDecorator } = this.props.form;
     const userShow = this.state.logined ?
       <Menu mode="horizontal" className="menu">
-        <Menu.Item key="userinfo" >
-          <span><Link to="/setting/profile"><Icon type="user" className="menu-icon" /></Link></span>
-        </Menu.Item>
-        <Menu.Item key="logout">
-          <span><Icon type="poweroff" className="menu-icon" onClick={this.loginOut.bind(this)}/></span>
-        </Menu.Item>
+        <Dropdown overlay={usermenu}>
+          <Link to="/profile" className="ant-dropdown-link" ><Icon type="user" className="menu-icon" /></Link>
+        </Dropdown>
       </Menu>
       :
       <Menu mode="horizontal" className="menu">

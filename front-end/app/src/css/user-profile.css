@@ -1,0 +1,22 @@
+.profile-main-info img{
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+}
+.profile-main-info div.avatar{
+    width: 120px;
+    margin: 0 auto;
+    padding-bottom: 15px;
+}
+.profile-main-info table{
+    text-align: center;
+}
+
+.card {
+    float: left;
+    padding: 20px;
+}
+
+.clean{
+    clear: both;
+}

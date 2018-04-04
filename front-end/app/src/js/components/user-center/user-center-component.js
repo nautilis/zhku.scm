@@ -4,7 +4,6 @@ import {
   Menu, Icon, Switch,
   Col,
   Row,
-
 } from 'antd';
 import { Link, Route, HashRouter as Router } from 'react-router-dom';
 

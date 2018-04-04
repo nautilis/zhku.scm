@@ -1,4 +1,7 @@
+# -*-coding: utf-8 -*-
 from app.main  import db, Base
+from app.model.user_club import UserClub
+from app.model.club import Club
 import time
 
 class User(Base):
@@ -68,6 +71,13 @@ class User(Base):
         })
 
         db.session.commit()
+
+    @classmethod
+    def get_all_clubs(cls, user):
+        club_ids = UserClub.get_users_club_ids(user.uid)
+        clubs = Club.find_clubs_by_ids(club_ids)
+        return clubs
+
 
         
 
