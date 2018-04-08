@@ -9,6 +9,9 @@ import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import {auth} from './fetch/login-auth';
 import {PrivateRoute} from './routes/private-route';
 import Link from 'react-router-dom/Link';
+import { Carousel, Row, Col} from 'antd';
+import MainPage from "./main-page";
+
 
 
 
@@ -16,15 +19,16 @@ export default class App extends React.Component {
   constructor() {
     super();
   }
+
   render() {
     return (
       <Router>
         <div>
           <HeaderComponent />
+          <Route path="/" component={MainPage} exact/>
           <PrivateRoute authed={auth.loginAuth} path="/setting" component={UserCenterComponent} />
           <PrivateRoute authed={auth.loginAuth} path="/club/:cid/admin" component={ClubAdminComponent} />
           <PrivateRoute authed={auth.loginAuth} path="/profile" component={UserProfileComponent}/>
-          <Link to="/club/1/admin">管理社团</Link>
         </div>
       </Router>
 

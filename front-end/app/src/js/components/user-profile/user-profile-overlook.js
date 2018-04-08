@@ -1,30 +1,51 @@
 let css = require("../../../css/user-profile.css")
 import React from 'react';
+import { myfetch } from "../../fetch/myfetch";
 import {
   Col,
   Row,
   Card,
+  Button,
+
 } from 'antd';
+import {Link} from 'react-router-dom';
 
 export default class UserProfileOverlook extends React.Component{
   constructor(){
     super();
+    this.state = {
+      user: null,
+      clubs: [],
+      token: localStorage.getItem("scm-token"),
+    }
   }
   
+  componentWillMount(){
+    myfetch("GET", "http://127.0.0.1:5000/api/v1/user/clubs" + "?token=" + this.state.token, null).then(json =>{
+      console.log(json);
+      this.setState({
+        user: json.user,
+        clubs: json.clubs,
+      });
+    })
+  }
+
   render(){
     const clubs = [];
     const activities = [];
     const recruitments = [];
-    for(let i=0;i<4;i++){
+    let clubLength = this.state.clubs.length > 4 ? 4 : this.state.clubs.length; 
+    for(let i=0; i< clubLength;i++){
       clubs.push(
         <div className="card">
-              <Card title="足球社" extra={<a href="#">More</a>} style={{ width: 300 }} hoverable={true}>
-                <p>职位：社员</p>
-                <p>管理</p>
+              <Card title={this.state.clubs[i].name} extra={<a href="#">More</a>} style={{ width: 300 }} hoverable={true}>
+                <p>职位：{this.state.clubs[i].is_admin == "1" ? "管理员" : "社员"}</p>
+                <p>{this.state.clubs[i].is_admin == "1" ? <Link to={`/club/${this.state.clubs[i].cid}/admin`}><Button type="primary" >管理</Button></Link> : <Button type="primary" disabled>管理</Button>}</p>
               </Card>
         </div>
       );
-    };
+    }
+
     for(let i=0;i<2;i++){
       activities.push(
         <div className="card">

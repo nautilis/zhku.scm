@@ -7,15 +7,17 @@ import {
   Table,
   Button,
 } from 'antd';
-import { Link, Route } from 'react-router-dom'
+import { Link, Route } from 'react-router-dom'; 
+import { myfetch } from "../../fetch/myfetch";
 import { Menu, Icon } from 'antd';
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 
 import UserProfileOverlook from './user-profile-overlook'
+import {withRouter} from 'react-router-dom';
 
 
-export default class UserProfileComponent extends React.Component {
+class UserProfileComponent extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -24,9 +26,24 @@ export default class UserProfileComponent extends React.Component {
       email: "patrick@gmail.com",
       campus: "海珠",
       current: 'overlook',
+      token: localStorage.getItem("scm-token"),
     }
   }
+  componentWillMount(){
+    myfetch("GET", "http://127.0.0.1:5000/api/v1/user/clubs" + "?token=" + this.state.token, null).then(json =>{
+        this.setState({
+          username: json.user.username,
+          avatarurl: "http://127.0.0.1:5000/static" + json.user.avatar,
+          email: json.user.email,
+          campus: json.user.campus == "baiyun" ? "白云" : "海珠",
+        })
+      });
+  }
 
+  componentDidMount(){
+    this.props.history.push(`${this.props.match.url}/overlook`)
+  }
+    
   handleClick(e) {
     console.log('click ', e);
     this.setState({
@@ -112,3 +129,5 @@ export default class UserProfileComponent extends React.Component {
     );
   }
 }
+
+export default withRouter(UserProfileComponent);

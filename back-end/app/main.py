@@ -31,6 +31,9 @@ app.register_blueprint(user_api,  url_prefix='/api/v1/user')
 from app.api.club import club_api
 app.register_blueprint(club_api, url_prefix='/api/v1/club' )
 
+from app.api.article import article_api
+app.register_blueprint(article_api, url_prefix="/api/v1/article")
+
 def main():
     app.run()
 
