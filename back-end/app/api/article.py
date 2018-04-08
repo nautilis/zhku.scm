@@ -39,7 +39,7 @@ def test():
 
 @article_api.route('/picture', methods=['POST'])
 @logined_token_required
-def update_avatar(user):
+def update_picture(user):
     data = request.get_data()
     # print data
     file = request.files['file']
@@ -53,3 +53,14 @@ def update_avatar(user):
     file.save(location)
     store_location = location.split("/static").pop()
     return jsonify({"location": store_location})
+
+@article_api.route("/", methods=["GET"])
+def get_all_article():
+    articles = Article.get_last_by_limit(4)
+    res = {}
+    res["articles"] = []
+    for a in articles:
+        res["articles"].append(a.to_dict())
+    
+    return jsonify(res)
+    

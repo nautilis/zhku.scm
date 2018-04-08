@@ -2,6 +2,8 @@
 from flask import Flask
 from flask_cors import CORS
 from app.config import DevConfig
+from sqlalchemy import desc
+
 
 #app 
 app = Flask(__name__)
