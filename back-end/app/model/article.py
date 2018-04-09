@@ -29,3 +29,11 @@ class Article(Base):
     def get_last_by_limit(cls, limit):
         articles = cls.query.filter_by(can_show=1).order_by(desc(cls.date_created)).limit(limit).all()
         return articles
+
+    @classmethod
+    def get_article_by_id(cls, id):
+        article = cls.query.filter_by(aid=id).first()
+        if article.can_show:
+            return article
+        else:
+            return None

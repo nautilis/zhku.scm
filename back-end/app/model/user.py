@@ -78,6 +78,11 @@ class User(Base):
         clubs = Club.find_clubs_by_ids(club_ids)
         return clubs
 
+    @classmethod
+    def get_user_by_id(cls, id):
+        user = cls.query.filter_by(uid=id).first()
+        return user
+
 
         
 
