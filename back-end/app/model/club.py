@@ -8,6 +8,8 @@ class Club(Base):
     chairman = db.Column(db.String(255))
     memberno = db.Column(db.Integer)
     avatar = db.Column(db.String(1024))
+    desc = db.Column(db.Text())
+    address = db.Column(db.String(1024))
 
     def __init__(self):
         pass
@@ -34,7 +36,16 @@ class Club(Base):
     def update_club_info(cls, clubid, club):
         cls.query.filter_by(cid=clubid).update({
             "name": club.name,
-            "chairman": club.chairman
+            "chairman": club.chairman,
+            "address": club.chairman,
+            "desc": club.desc,
         })       
+        db.session.commit()
+
+    @classmethod
+    def update_avatar(cls, clubid, path):
+        cls.query.filter_by(cid=clubid).update({
+            "avatar": path,
+        })
         db.session.commit()
 

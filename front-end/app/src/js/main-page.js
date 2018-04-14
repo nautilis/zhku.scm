@@ -2,6 +2,7 @@ import React from 'react';
 import { Carousel, Row, Col} from 'antd';
 const css = require("../css/main-page.css");
 import {myfetch} from "./fetch/myfetch";
+import {Link} from 'react-router-dom';
 
 export default class MainPage extends React.Component{
     constructor(){
@@ -24,11 +25,13 @@ export default class MainPage extends React.Component{
         const articles = this.state.articles;
         const article_list = [];
         for(let i=0;i<articles.length;i++){
+            const picture = articles[i].picture.split("|")[0];
             article_list.push(
                 <div>
                     
-                        <img src={`http://127.0.0.1:5000/static${articles[i].picture}`} height="160px" width="900px" />
-                    
+                        <Link to={`/article/${articles[i].aid}`}>
+                        <img src={`http://127.0.0.1:5000/static${picture}`} height="160px" width="900px" />
+                        </Link>
                 </div>
             )
         }

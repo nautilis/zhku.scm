@@ -13,6 +13,7 @@ export default class TestComponent extends React.Component{
   }
 
   handleClick(){
+    console.log(this.props.cid);
     var fetchOptions={
       method: 'POST',
       headers: {
