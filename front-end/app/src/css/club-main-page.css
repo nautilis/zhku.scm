@@ -3,12 +3,12 @@
 }
 .photos{
     height: 290px;
-    background: url("../images/club-main-page-bacg.jpg");
+    background: url("../images/club-main-page-bacg.png");
 }
 .pic-name{
     text-align: center;
     position: relative;
-    top:30%;    
+    top:30%;
 }
 
 .pic-name span{
