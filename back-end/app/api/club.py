@@ -1,6 +1,7 @@
 #-*-coding: utf8 -*-
 from flask import request, jsonify, Blueprint
 from app.model.club import Club
+from app.model.article import Article
 club_api = Blueprint('club_api', __name__)
 import json
 from app.helps.somedangerous import get_token, logined_token_required
@@ -75,5 +76,13 @@ def get_club_info(cid):
     res["status"] = "ok"
     return jsonify(res)
 
-    
+@club_api.route("/<int:cid>/articles", methods=["GET"])
+def get_all_article(cid):
+    articles = Article.get_all_article_of_club(cid)
+    res = {}
+    res["articles"] = []
+    for article in articles:
+        res["articles"].append(article.to_dict())
+
+    return jsonify(res)    
 

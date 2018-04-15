@@ -38,7 +38,7 @@ export default class UserProfileOverlook extends React.Component{
     for(let i=0; i< clubLength;i++){
       clubs.push(
         <div className="card">
-              <Card title={this.state.clubs[i].name} extra={<a href="#">More</a>} style={{ width: 300 }} hoverable={true}>
+              <Card title={this.state.clubs[i].name} extra={<a href={`/#/club/${this.state.clubs[i].cid}`}>More</a>} style={{ width: 300 }} hoverable={true}>
                 <p>职位：{this.state.clubs[i].is_admin == "1" ? "管理员" : "社员"}</p>
                 <p>{this.state.clubs[i].is_admin == "1" ? <Link to={`/club/${this.state.clubs[i].cid}/admin`}><Button type="primary" >管理</Button></Link> : <Button type="primary" disabled>管理</Button>}</p>
               </Card>

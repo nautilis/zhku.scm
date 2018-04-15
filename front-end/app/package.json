@@ -33,6 +33,7 @@
     "webpack-dev-server": "^2.10.1"
   },
   "devDependencies": {
-    "babel-plugin-transform-object-rest-spread": "^6.26.0"
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "url-loader": "^1.0.1"
   }
 }

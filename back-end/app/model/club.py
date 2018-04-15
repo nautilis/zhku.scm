@@ -49,3 +49,5 @@ class Club(Base):
         })
         db.session.commit()
 
+
+

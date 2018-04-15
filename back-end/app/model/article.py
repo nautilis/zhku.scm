@@ -37,3 +37,11 @@ class Article(Base):
             return article
         else:
             return None
+
+    @classmethod
+    def get_all_article_of_club(cls, clubid):
+        articles = cls.query.filter_by(cid=clubid, can_show=1).all()
+        if articles:
+            return articles
+        else:
+            return []

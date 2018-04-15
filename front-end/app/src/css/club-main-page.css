@@ -1,0 +1,33 @@
+.club-pic{
+    border-radius: 50%;
+}
+.photos{
+    height: 290px;
+    background: url("../images/club-main-page-bacg.jpg");
+}
+.pic-name{
+    text-align: center;
+    position: relative;
+    top:30%;    
+}
+
+.pic-name span{
+    display: block;
+    font-size: 20px;
+    font-family: "Microsoft YaHei";
+    padding-top: 5px;
+}
+.club-info .info-item{
+    padding: 5px 0;
+}
+.club-info{
+    margin-top: 25px;
+    float:left;
+}
+
+.club-articles{
+    float: left;
+    margin-top: 25px;
+    margin-left: 20px;
+    width: 500px;
+}

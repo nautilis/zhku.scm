@@ -1,0 +1,26 @@
+.clubs .ant-carousel .slick-slide {
+    width: 200px;
+    height: 500px;
+    line-height: 25px;
+    background: #DCDCDC;
+    text-align: left;
+  }
+
+  .clubs .ant-carousel{
+    background: #B22222;
+  }
+  .clubs ul{
+      padding-left: 25px;
+  }
+  .clubs ul li {
+      padding-top: 5px;
+      line-height: 15px;
+      list-style-type: none;
+
+  }
+  .clubs ul li .clubname{
+    display: inline-block;
+    vertical-align: middle;
+    padding-bottom: 25px;
+    padding-left: 5px;
+  }

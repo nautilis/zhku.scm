@@ -10,8 +10,9 @@ import {auth} from './fetch/login-auth';
 import {PrivateRoute} from './routes/private-route';
 import Link from 'react-router-dom/Link';
 import { Carousel, Row, Col} from 'antd';
-import MainPage from "./main-page";
-import ArticleIndex from "./components/article/article-index"
+import MainPage from "./components/main-page/main-page";
+import ArticleIndex from "./components/article/article-index";
+import ClubMainPageComponent from "./components/club/main-page";
 
 
 
@@ -31,6 +32,7 @@ export default class App extends React.Component {
           <PrivateRoute authed={auth.loginAuth} path="/club/:cid/admin" component={ClubAdminComponent} />
           <PrivateRoute authed={auth.loginAuth} path="/profile" component={UserProfileComponent}/>
           <Route path="/article/:id" component={ArticleIndex}/>
+          <Route path="/club/:cid" component={ClubMainPageComponent} exact/>
         </div>
       </Router>
 
