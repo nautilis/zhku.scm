@@ -6,6 +6,7 @@ import CreateArticle from './create-article';
 import UpdateClubInfoComponent from './update-club-info';
 let css = require("../../../css/club-admin.css");
 import TestComponent from "../test-component";
+import EmploymentPublish from "./employment-publish";
 
 export default class ClubAdminComponent extends React.Component {
   constructor() {
@@ -51,10 +52,10 @@ export default class ClubAdminComponent extends React.Component {
             </SubMenu>
           </SubMenu>
           <SubMenu key="sub4" title={<span><Icon type="setting" /><span>招聘管理</span></span>}>
-            <Menu.Item key="9">Option 9</Menu.Item>
-            <Menu.Item key="10">Option 10</Menu.Item>
-            <Menu.Item key="11">Option 11</Menu.Item>
-            <Menu.Item key="12">Option 12</Menu.Item>
+            <Menu.Item key="9"><Link to={`${this.props.match.url}/create-employment`}>发布招聘</Link></Menu.Item>
+            <Menu.Item key="10">修改招聘</Menu.Item>
+            <Menu.Item key="11">查看报名</Menu.Item>
+            <Menu.Item key="12">录用成员</Menu.Item>
           </SubMenu>
           <SubMenu key="sub5" title={<span><Icon type="setting" /><span>社团信息管理</span></span>}>
             <Menu.Item key="11"><Link to={`${this.props.match.url}/update-club-info`}>社团信息编辑</Link></Menu.Item>
@@ -66,6 +67,7 @@ export default class ClubAdminComponent extends React.Component {
         <Route path={`${this.props.match.path}/update-club-info`} render={(props) => (
         <UpdateClubInfoComponent cid={this.props.match.params.cid} {...props} />
         )}/> 
+        <Route path={`${this.props.match.path}/create-employment`} component={EmploymentPublish}/> 
         </Col>
         <Col span={4}/>
         </Row>

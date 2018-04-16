@@ -1,0 +1,31 @@
+# 通常建议项目最顶层的配置文件设置该值
+root = true
+
+# 表示以 Unix 风格的换行符结尾
+[*]
+end_of_line = lf
+insert_final_newline = true
+
+# 中括号中的通配符匹配多种类型的文件(这里是 js 和 py)
+# 并设置文件的编码类型
+[*.{js,py}]
+charset = utf-8
+
+# 四格缩进
+[*.py]
+indent_style = space
+indent_size = 4
+
+# 设置缩进类型为 tab
+[Makefile]
+indent_style = tab
+
+# 覆盖 lib 目录下的所有 js 文件的缩进宽度为 2 空格
+[lib/**.js]
+indent_style = space
+indent_size = 2
+
+# 精确匹配 package.json 和 .travis.yml
+[{package.json,.travis.yml}]
+indent_style = space
+indent_size = 2
