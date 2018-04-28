@@ -14,3 +14,21 @@
     background: #fff;
   }
 
+  .main-content{
+    padding-top: 20px;
+  }
+
+.list-span{
+  display: inline-block;
+}
+
+.list-avatar{
+  padding-right: 5px;
+  padding-left: 10px;
+}
+.list-title{
+  padding-right: 25px;
+}
+.list-time{
+  padding-right: 5px;
+}

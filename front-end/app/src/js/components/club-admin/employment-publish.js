@@ -9,16 +9,49 @@ const FormItem = Form.Item;
 class EmploymentPublish extends React.Component {
 	constructor() {
 		super();
+		this.state = {
+			token : localStorage.getItem("scm-token"),
+			resumeFile : null,
+		}
 	}
 
 	handleSubmit(e){
 		e.preventDefault();
 		var formData = this.props.form.getFieldsValue();
+		let data = {
+			title : formData.title,
+			content: formData.content,
+			deadline: formData.deadline.format("YYYY-MM-DD HH:mm:ss"),
+			interviewTime: formData.interviewTime.format("YYYY-MM-DD HH:mm:ss"),
+			interviewAddress: formData.interviewAddress,
+			resumeFile: this.state.resumeFile,
+			cid: this.props.match.params.cid,
+		}
+		console.log(data);
+		myfetch("POST", "http://127.0.0.1:5000/api/v1/employment/?token=" + this.state.token, data).then(json=>{
+			console.log(json);
+			message.success(json.message);
+		})
+
+		this.props.form.resetFields();
 		console.log(formData.deadline.format("YYYY-MM-DD HH:mm:ss"));
 	}
 
-    handleUploadFile(){
+    handleUploadFile(e){
+		e.preventDefault();
+        const data = new FormData();
+        data.append('file', e.target.files[0]);
 
+        const fetchOption = {
+            method: "POST",
+            body: data,
+          };
+        fetch("http://127.0.0.1:5000/api/v1/employment/upload-resume?token=" + this.state.token, fetchOption).then(response => response.json()).then(json=>{
+			console.log(json);
+			this.setState({
+				resumeFile: json.location,
+			})
+		});
 	}
 
 	render() {

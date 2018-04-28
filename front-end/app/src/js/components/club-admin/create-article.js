@@ -32,7 +32,7 @@ class CreateArticle extends React.Component{
     }
 
     handleUploadFile(e){
-        console.log(e);
+        e.preventDefault();
         const data = new FormData();
         data.append('file', e.target.files[0]);
         console.log(data);

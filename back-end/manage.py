@@ -7,6 +7,7 @@ from app.model import User, Club
 from app.model.user_club import UserClub
 from app.model.admin_club import AdminClub
 from app.model.article import Article
+from app.model.employment import Employment
 from flask_script import Server, Manager
 from flask_migrate import Migrate, MigrateCommand
 
@@ -21,7 +22,9 @@ manager.add_command('db', MigrateCommand)
 def make_shell_content():
     return dict(app=app, db=db, User=User,
      Club=Club, UserClub=UserClub, 
-     AdminClub=AdminClub, Article=Article)
+     AdminClub=AdminClub, Article=Article,
+     Employment = Employment
+    )
 
 if __name__ == "__main__":
     manager.run()

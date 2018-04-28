@@ -1,5 +1,5 @@
 import React from 'react';
-import { Carousel, Row, Col, Divider } from 'antd';
+import { Carousel, Row, Col, Divider, Icon, List, Avatar } from 'antd';
 const css = require("../../../css/main-page.css");
 import { myfetch } from "../../fetch/myfetch";
 import { Link } from 'react-router-dom';
@@ -24,6 +24,21 @@ export default class MainPage extends React.Component {
         });
     }
     render() {
+        let one = {title: "学生会招聘",
+         "avatar": "http://127.0.0.1:5000/static/uploads/club_pictures/RSGTUZHRsA17lgU2.jpg",
+        "interviewTime": "2018-09-09"}
+        const data = [];
+        for(let i=0;i<5;i++){
+            data.push(one)
+        }
+        let one_activity = {"title": "珠海骑行",
+        "avatar": "http://127.0.0.1:5000/static/uploads/club_pictures/RSGTUZHRsA17lgU2.jpg",
+        "activityTime": "2018-05-05",
+        }
+        const activityData = []
+        for(let i=0;i<4;i++){
+            activityData.push(one_activity); 
+        }
         const articles = this.state.articles;
         const article_list = [];
         for (let i = 0; i < articles.length; i++) {
@@ -50,8 +65,38 @@ export default class MainPage extends React.Component {
                 </Col>
                 <Col span={4} />
             </Row>
+            <div className="main-content">
             <Row>
                 <Col span={4}/>
+                <Col span={11}>
+                <div className="activity">
+                <h3><Icon type="gift" style={{ fontSize: 16, color: '#1890ff' }}/>  活动</h3>
+                <div>
+                <List
+                dataSource={activityData}
+                renderItem={item=>(
+                    <List.Item>
+                   <Link to="#" ><span className="list-span list-avatar"><Avatar src={item.avatar}/></span><span className="list-span list-title">{item.title}</span><span clasName="list-span list-time">{item.activityTime}</span><span clasName="list-span">  >></span></Link>
+                    </List.Item>
+                )}
+                />
+                </div>
+                </div>
+
+                <div className="employment">
+                <h3><Icon  type="notification" style={{ fontSize: 16, color: '#1890ff' }}/>  招聘</h3>
+                <div>
+                <List
+                dataSource={data}
+                renderItem={item=>(
+                    <List.Item>
+                   <Link to="#" ><span className="list-span list-avatar"><Avatar src={item.avatar}/></span><span className="list-span list-title">{item.title}</span><span clasName="list-span list-time">{item.interviewTime}</span><span clasName="list-span">  >></span></Link>
+                    </List.Item>
+                )}
+                />
+                </div>
+                </div>
+                </Col>
                 <Col span={5}>
                 <div className="clubs-carousel">
                 <ClubsCarousel/>
@@ -59,6 +104,7 @@ export default class MainPage extends React.Component {
                 </Col>
                 <Col span={4}/>
             </Row>
+            </div>
             </div>
         );
     }

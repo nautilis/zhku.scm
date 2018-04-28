@@ -36,6 +36,9 @@ app.register_blueprint(club_api, url_prefix='/api/v1/club' )
 from app.api.article import article_api
 app.register_blueprint(article_api, url_prefix="/api/v1/article")
 
+from app.api.employment import employment_api
+app.register_blueprint(employment_api, url_prefix="/api/v1/employment")
+
 def main():
     app.run()
 
