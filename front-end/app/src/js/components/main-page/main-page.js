@@ -11,6 +11,7 @@ export default class MainPage extends React.Component {
         this.state = {
             articles: [],
             clubs : [],
+            employments: [],
         }
     }
     componentWillMount() {
@@ -22,15 +23,15 @@ export default class MainPage extends React.Component {
             console.log("now articles");
             console.log(this.state.articles);
         });
+        myfetch("GET", "http://127.0.0.1:5000/api/v1/employment/list", null).then(json=>{
+            console.log(json.employments);
+            this.setState({
+                employments: json.employments
+            })
+        });
     }
     render() {
-        let one = {title: "学生会招聘",
-         "avatar": "http://127.0.0.1:5000/static/uploads/club_pictures/RSGTUZHRsA17lgU2.jpg",
-        "interviewTime": "2018-09-09"}
-        const data = [];
-        for(let i=0;i<5;i++){
-            data.push(one)
-        }
+        const data = this.state.employments;
         let one_activity = {"title": "珠海骑行",
         "avatar": "http://127.0.0.1:5000/static/uploads/club_pictures/RSGTUZHRsA17lgU2.jpg",
         "activityTime": "2018-05-05",
@@ -90,7 +91,7 @@ export default class MainPage extends React.Component {
                 dataSource={data}
                 renderItem={item=>(
                     <List.Item>
-                   <Link to="#" ><span className="list-span list-avatar"><Avatar src={item.avatar}/></span><span className="list-span list-title">{item.title}</span><span clasName="list-span list-time">{item.interviewTime}</span><span clasName="list-span">  >></span></Link>
+                   <Link to={`/employment/${item.eid}`} ><span className="list-span list-avatar"><Avatar src={item.avatar}/></span><span className="list-span list-title">{item.title}</span><span clasName="list-span list-time">{item.interview_time}</span><span clasName="list-span">  >></span></Link>
                     </List.Item>
                 )}
                 />

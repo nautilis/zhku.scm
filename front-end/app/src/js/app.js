@@ -13,6 +13,7 @@ import { Carousel, Row, Col} from 'antd';
 import MainPage from "./components/main-page/main-page";
 import ArticleIndex from "./components/article/article-index";
 import ClubMainPageComponent from "./components/club/main-page";
+import ShowEmployment from "./components/employment/show-employment";
 
 
 
@@ -33,6 +34,7 @@ export default class App extends React.Component {
           <PrivateRoute authed={auth.loginAuth} path="/profile" component={UserProfileComponent}/>
           <Route path="/article/:id" component={ArticleIndex}/>
           <Route path="/club/:cid" component={ClubMainPageComponent} exact/>
+          <Route path="/employment/:id" component={ShowEmployment} />
         </div>
       </Router>
 

@@ -1,6 +1,7 @@
 #-*- coding: utf-8 -*-
 from app.main  import db, Base
 import time
+from sqlalchemy import desc
 
 class Employment(Base):
      eid = db.Column(db.Integer, primary_key=True)
@@ -16,3 +17,13 @@ class Employment(Base):
      def create_employment(cls, employment):
          db.session.add(employment)
          db.session.commit()
+
+     @classmethod
+     def get_by_id(cls, id):
+         employment = cls.query.filter_by(eid=id).first()
+         return employment
+
+     @classmethod
+     def get_employments(cls,limit):
+        employments = cls.query.order_by(desc(cls.date_created)).limit(limit).all()
+        return employments

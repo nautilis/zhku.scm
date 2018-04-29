@@ -8,6 +8,7 @@ from app.helps.common import random_str
 import time
 import os
 from app.model.employment import Employment
+from app.model.club import Club
 import pdb
 
 @employment_api.route("/", methods=["POST"])
@@ -46,4 +47,32 @@ def upload_resume(user):
     file.save(location)
     store_location = location.split("/static").pop()
     return jsonify({"location": store_location})
+
+@employment_api.route("/<int:id>", methods=["GET"])
+def get_employment(id):
+    employment = Employment.get_by_id(id)
+    club = Club.find_club_by_id(employment.cid)
+    print employment
+    res  = {}
+    res["employment"] = employment.to_dict()
+    res["employment"]["clubName"] = club.name
+    return jsonify(res)
+
+@employment_api.route("/list", methods=["GET"])
+def get_employment_list():
+    employments = Employment.get_employments(4)
+    res = {}
+    res["employments"] = []
+    for e in employments:
+        cid = e.cid
+        club = Club.find_club_by_id(cid)
+        if club:
+            avatar = "http://127.0.0.1:5000/static" + club.avatar
+        else:
+            avatar = "" 
+        e_dict = e.to_dict()
+        e_dict["avatar"] = avatar
+        res["employments"].append(e_dict)
+
+    return jsonify(res)
 
