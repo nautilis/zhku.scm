@@ -2,3 +2,5 @@
 node_modules
 dist/
 *.jpg
+*.jpeg
+*.doc

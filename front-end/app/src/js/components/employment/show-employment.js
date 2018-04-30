@@ -4,6 +4,7 @@ const css = require("../../../css/article-index.css")
 import { Divider } from 'antd';
 import {myfetch} from "../../fetch/myfetch";
 import {Link} from "react-router-dom"
+import NewApply from "../apply/new-apply";
 
 export default class ShowEmployment extends React.Component{
     constructor(){
@@ -63,6 +64,9 @@ export default class ShowEmployment extends React.Component{
                 </div>
                 <div className="resume-file">
                   <a href={this.state.resumeFile} >简历模板</a>
+                </div>
+                <div className="apply" >
+                  <NewApply eid={this.props.match.params.id} type="employment" activityid ={null}/>
                 </div>
               </div>
             </Col>
