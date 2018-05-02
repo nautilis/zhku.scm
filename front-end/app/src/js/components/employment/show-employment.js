@@ -16,7 +16,7 @@ export default class ShowEmployment extends React.Component{
             interviewTime: "2018-09-09",
             interviewAddress: "刘宇新楼407",
             resumeFile: "http://abc.doc",
-            cid: 2,
+            cid: 1,
             clubName: "网络中心",
             createAt: "2018-09-01",
         }
@@ -35,6 +35,7 @@ export default class ShowEmployment extends React.Component{
                 interviewTime: json.employment.interview_time,
                 interviewAddress: json.employment.interview_address,
                 resumeFile: "http://127.0.0.1:5000/static" +json.employment.resume_file,
+                cid: json.employment.cid,
             })
         })
     }
@@ -66,7 +67,10 @@ export default class ShowEmployment extends React.Component{
                   <a href={this.state.resumeFile} >简历模板</a>
                 </div>
                 <div className="apply" >
-                  <NewApply eid={this.props.match.params.id} type="employment" activityid ={null}/>
+                  <NewApply eid={this.props.match.params.id} 
+                  type="employment" 
+                  clubid={this.state.cid}
+                  activityid ={null}/>
                 </div>
               </div>
             </Col>

@@ -16,3 +16,18 @@ class UserClub(Base):
             ids.append(c.c_id)
 
         return ids
+
+    @classmethod
+    def is_existed(cls, userid, clubid):
+        uc = cls.query.filter_by(u_id=userid, c_id=clubid).first()
+        if uc:    
+            return True
+        return False
+
+    @classmethod
+    def create(cls, userid, clubid):
+        uc = UserClub()
+        uc.u_id = userid
+        uc.c_id = clubid
+        db.session.add(uc)
+        db.session.commit()

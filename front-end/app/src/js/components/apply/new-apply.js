@@ -27,6 +27,7 @@ class NewApply extends React.Component{
             name: formData.name,
             phone : formData.phone,
             filepath: this.state.filePath,
+            clubid: this.props.clubid,
         }
         console.log(data)
         myfetch("POST", "http://127.0.0.1:5000/api/v1/apply/?token=" + this.state.token, data).then(json=>{

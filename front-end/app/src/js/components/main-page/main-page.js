@@ -77,7 +77,7 @@ export default class MainPage extends React.Component {
                 dataSource={activityData}
                 renderItem={item=>(
                     <List.Item>
-                   <Link to="#" ><span className="list-span list-avatar"><Avatar src={item.avatar}/></span><span className="list-span list-title">{item.title}</span><span clasName="list-span list-time">{item.activityTime}</span><span clasName="list-span">  >></span></Link>
+                   <Link to="#" ><span className="list-span list-avatar"><Avatar src={item.avatar}/></span><span className="list-span list-title">{item.title}</span><span clasName="list-span list-time">{item.activityTime}</span><span className="list-span">  >></span></Link>
                     </List.Item>
                 )}
                 />
@@ -91,7 +91,7 @@ export default class MainPage extends React.Component {
                 dataSource={data}
                 renderItem={item=>(
                     <List.Item>
-                   <Link to={`/employment/${item.eid}`} ><span className="list-span list-avatar"><Avatar src={item.avatar}/></span><span className="list-span list-title">{item.title}</span><span clasName="list-span list-time">{item.interview_time}</span><span clasName="list-span">  >></span></Link>
+                   <Link to={`/employment/${item.eid}`} ><span className="list-span list-avatar"><Avatar src={item.avatar}/></span><span className="list-span list-title">{item.title}</span><span className="list-span list-time">{item.interview_time}</span><span clasName="list-span">  >></span></Link>
                     </List.Item>
                 )}
                 />
