@@ -42,6 +42,9 @@ app.register_blueprint(employment_api, url_prefix="/api/v1/employment")
 from app.api.apply_api import apply_api
 app.register_blueprint(apply_api, url_prefix="/api/v1/apply")
 
+from app.api.activity_api import activity_api
+app.register_blueprint(activity_api, url_prefix="/api/v1/activity")
+
 def main():
     app.run()
 

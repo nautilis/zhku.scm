@@ -8,6 +8,7 @@ from app.model.user_club import UserClub
 from app.model.admin_club import AdminClub
 from app.model.article import Article
 from app.model.employment import Employment
+from app.model.activity import Activity
 from flask_script import Server, Manager
 from flask_migrate import Migrate, MigrateCommand
 
