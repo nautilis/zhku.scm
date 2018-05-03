@@ -12,6 +12,7 @@ export default class MainPage extends React.Component {
             articles: [],
             clubs : [],
             employments: [],
+            activityData: []
         }
     }
     componentWillMount() {
@@ -29,17 +30,25 @@ export default class MainPage extends React.Component {
                 employments: json.employments
             })
         });
+        myfetch("GET", "http://127.0.0.1:5000/api/v1/activity/list", null).then(json=>{
+            console.log("activities data")
+            console.log(json.activities)
+            this.setState({
+                activityData: json.activities
+            })
+        });
     }
     render() {
         const data = this.state.employments;
-        let one_activity = {"title": "珠海骑行",
-        "avatar": "http://127.0.0.1:5000/static/uploads/club_pictures/RSGTUZHRsA17lgU2.jpg",
-        "activityTime": "2018-05-05",
-        }
-        const activityData = []
-        for(let i=0;i<4;i++){
-            activityData.push(one_activity); 
-        }
+        const activityData = this.state.activityData;
+        // let one_activity = {"title": "珠海骑行",
+        // "avatar": "http://127.0.0.1:5000/static/uploads/club_pictures/RSGTUZHRsA17lgU2.jpg",
+        // "activityTime": "2018-05-05",
+        // }
+        // const activityData = []
+        // for(let i=0;i<4;i++){
+        //     activityData.push(one_activity); 
+        // }
         const articles = this.state.articles;
         const article_list = [];
         for (let i = 0; i < articles.length; i++) {
@@ -77,7 +86,7 @@ export default class MainPage extends React.Component {
                 dataSource={activityData}
                 renderItem={item=>(
                     <List.Item>
-                   <Link to="#" ><span className="list-span list-avatar"><Avatar src={item.avatar}/></span><span className="list-span list-title">{item.title}</span><span clasName="list-span list-time">{item.activityTime}</span><span className="list-span">  >></span></Link>
+                   <Link to={`/activity/${item.acid}`} ><span className="list-span list-avatar"><Avatar src={item.avatar}/></span><span className="list-span list-title">{item.title}</span><span className="list-span list-time">{item.activity_time}</span><span className="list-span">  >></span></Link>
                     </List.Item>
                 )}
                 />

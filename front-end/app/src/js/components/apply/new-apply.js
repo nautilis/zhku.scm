@@ -57,7 +57,10 @@ class NewApply extends React.Component{
 
     render(){
         const { getFieldDecorator } = this.props.form;
-
+        const fileItem = (this.props.type == "employment" ? <FormItem label="上传简历">
+                <Input type="file" onChange={this.handleUploadFile.bind(this)} />
+            </FormItem> : null)
+  
         return (
             <div style={{ background: '#ECECEC', padding: '30px' }}>
             <Card title="报名" bordered={false} >
@@ -73,9 +76,7 @@ class NewApply extends React.Component{
                 )}
             </FormItem>
             <br/>
-            <FormItem label="上传简历">
-                <Input type="file" onChange={this.handleUploadFile.bind(this)} />
-            </FormItem>
+            {fileItem}
             <br/>
             <Button type="primary" htmlType="submit" className="login-form-button">
                 提交

@@ -16,3 +16,13 @@ class Activity(Base):
     def create(cls, activity):
         db.session.add(activity)
         db.session.commit()
+
+    @classmethod
+    def get_by_id(cls, id):
+        activity = cls.query.filter_by(acid=id).first()
+        return activity
+
+    @classmethod
+    def get_activities(cls, limit):
+        activity = cls.query.order_by(desc(cls.date_created)).limit(limit).all()
+        return activity 

@@ -29,3 +29,29 @@ def create(user):
 
     res = {"message": "创建成功"}
     return jsonify(res)
+
+@activity_api.route("/<int:id>", methods=["GET"])
+def get_activity(id):
+    activity = Activity.get_by_id(id)
+    club = Club.find_club_by_id(activity.cid)
+    res = {}
+    res["activity"] = activity.to_dict()
+    res["activity"]["clubName"] = club.name
+    return jsonify(res)
+
+@activity_api.route("/list", methods=["GET"])
+def get_activity_list():
+    activies = Activity.get_activities(4)
+    res = {}
+    res["activities"] = []
+    for activity in activies:
+        club = Club.find_club_by_id(activity.cid)
+        if club:
+            avatar = "http://127.0.0.1:5000/static" + club.avatar
+        else:
+            avatar = "" 
+
+        a_dict = activity.to_dict()
+        a_dict["avatar"] = avatar
+        res["activities"].append(a_dict)
+    return jsonify(res)
