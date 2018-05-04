@@ -9,7 +9,9 @@ import TestComponent from "../test-component";
 import EmploymentPublish from "./employment-publish";
 import AppyList from "./apply-list";
 import ApplyList from './apply-list';
-import ActivityPublish from "./activity-publish"
+import ActivityPublish from "./activity-publish";
+import ActivityList from "./activity-list";
+import ActivityApply from "./activity-apply";
 
 export default class ClubAdminComponent extends React.Component {
   constructor() {
@@ -49,7 +51,7 @@ export default class ClubAdminComponent extends React.Component {
           <SubMenu key="sub2" title={<span><Icon type="appstore" /><span>活动管理</span></span>}>
             <Menu.Item key="5"><Link to={`${this.props.match.url}/create-activity`}>发布活动</Link></Menu.Item>
             <Menu.Item key="6">修改活动</Menu.Item>
-            <Menu.Item key="7">查看报名</Menu.Item>
+            <Menu.Item key="7"><Link to={`${this.props.match.url}/activities`}>查看活动</Link></Menu.Item>
           </SubMenu>
           <SubMenu key="sub4" title={<span><Icon type="setting" /><span>招聘管理</span></span>}>
             <Menu.Item key="9"><Link to={`${this.props.match.url}/create-employment`}>发布招聘</Link></Menu.Item>
@@ -63,13 +65,15 @@ export default class ClubAdminComponent extends React.Component {
         </Menu>
         </Col>
         <Col span={13}>
-        <Route path={`${this.props.match.path}/create-article`} component={CreateArticle}/> 
+        <Route path={`${this.props.match.path}/create-article`} component={CreateArticle} exact/> 
         <Route path={`${this.props.match.path}/update-club-info`} render={(props) => (
         <UpdateClubInfoComponent cid={this.props.match.params.cid} {...props} />
         )}/> 
-        <Route path={`${this.props.match.path}/create-employment`} component={EmploymentPublish}/> 
-        <Route path={`${this.props.match.path}/applies`} component={ApplyList}/>
-        <Route paht={`${this.props.match.path}/create-activity`} component={ActivityPublish} />
+        <Route path={`${this.props.match.path}/create-employment`} component={EmploymentPublish} exact/> 
+        <Route path={`${this.props.match.path}/applies`} component={ApplyList} exact/>
+        <Route path={`${this.props.match.path}/create-activity`} component={ActivityPublish} exact />
+        <Route path={`${this.props.match.path}/activities`} component={ActivityList} exact/>
+        <Route path={`${this.props.match.path}/activities/:acid/applies`} component={ActivityApply} />
         </Col>
         <Col span={4}/>
         </Row>

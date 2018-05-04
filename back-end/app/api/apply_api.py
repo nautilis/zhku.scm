@@ -93,3 +93,18 @@ def reject(user, id):
     Apply.update_rejected(apply)
     res = {"message": "已回拒"}
     return jsonify(res)
+
+@apply_api.route("/activity/<int:activityid>", methods=["GET"])
+@logined_token_required
+def get_activity_apply_list(activityid, user):
+    applies = Apply.get_activity_applies(activityid)
+    res = {}
+    res["applies"] = []
+    for apply in applies:
+        user = User.get_user_by_id(apply.userid)
+        avatar = "http://127.0.0.1:5000/static" + user.avatar
+        apply = apply.to_dict()
+        apply["avatar"] = avatar
+        res["applies"].append(apply)
+
+    return jsonify(res)

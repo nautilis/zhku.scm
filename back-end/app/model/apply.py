@@ -24,7 +24,12 @@ class Apply(Base):
 
     @classmethod
     def get_list(cls, cid):
-        applies = cls.query.filter_by(clubid=cid, rejected=0, accepted=0).order_by(desc(cls.date_created)).all()
+        applies = cls.query.filter_by(clubid=cid, rejected=0, accepted=0, applytype="employment").order_by(desc(cls.date_created)).all()
+        return applies
+
+    @classmethod
+    def get_activity_applies(cls, acid):
+        applies = cls.query.filter_by(activityid=acid, rejected=0, accepted=0, applytype="activity").order_by(desc(cls.date_created)).all()
         return applies
 
     @classmethod

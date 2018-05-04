@@ -55,3 +55,13 @@ def get_activity_list():
         a_dict["avatar"] = avatar
         res["activities"].append(a_dict)
     return jsonify(res)
+
+@activity_api.route("/club/<int:id>", methods=["GET"])
+def get_clubs_activity(id):
+    activities = Activity.get_activities_of_club(id)
+    res = {}
+    res["activities"] = []
+    for a in activities:
+        res["activities"].append(a.to_dict())
+
+    return jsonify(res)

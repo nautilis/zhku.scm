@@ -62,7 +62,7 @@ export default class ShowActivity extends React.Component{
                   <span>活动地点：</span><span>{this.state.activityAddress}</span>
                 </div>
                 <div className="apply" >
-                  <NewApply eid={this.props.match.params.id} 
+                  <NewApply eid={null} 
                   type="activity" 
                   clubid={this.state.cid}
                   activityid ={this.props.match.params.id}/>

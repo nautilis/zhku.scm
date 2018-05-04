@@ -36,7 +36,7 @@ export default class App extends React.Component {
           <Route path="/article/:id" component={ArticleIndex}/>
           <Route path="/club/:cid" component={ClubMainPageComponent} exact/>
           <Route path="/employment/:id" component={ShowEmployment} />
-          <Route path="/activity/:id" component={ShowActivity}/>
+          <Route path="/activity/:id" component={ShowActivity} exact/>
         </div>
       </Router>
 
