@@ -84,6 +84,35 @@ def get_article(cid):
         res["article"] = {}
         
     return jsonify(res)
+
+@article_api.route("/<int:id>/update", methods=["POST"])
+@logined_token_required
+def update(user, id):
+    data = request.get_data()
+    jobj = json.loads(data)
+    print "on new article"
+    print jobj
+    print type(jobj)
+    content = jobj['content']
+    aid = id 
+    title = jobj['title']
+
+    article = Article()
+    article.content = content
+    article.aid = aid
+    article.title = title
+
+    Article.update(article)
+    res = {"message": "更新成功"}
+    return jsonify(res)
+
+@article_api.route("/<int:id>/delete", methods=["POSt"])
+@logined_token_required
+def delete(user, id):
+    Article.delete(id)
+    res = {"message":"删除成功"}
+    return jsonify(res)
+
     
 
     

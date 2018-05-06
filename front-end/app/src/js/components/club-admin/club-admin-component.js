@@ -11,8 +11,10 @@ import AppyList from "./apply-list";
 import ApplyList from './apply-list';
 import ActivityPublish from "./activity-publish";
 import ActivityList from "./activity-list";
+import ArticleList from "./article-list";
 import ActivityApply from "./activity-apply";
 import ActivityEdit from "./activity-edit";
+import ArticleEdit from "./article-edit";
 
 export default class ClubAdminComponent extends React.Component {
   constructor() {
@@ -46,19 +48,16 @@ export default class ClubAdminComponent extends React.Component {
         >
           <SubMenu key="sub1" title={<span><Icon type="mail" /><span>文章管理</span></span>}>
             <Menu.Item key="1"><Link to={`${this.props.match.url}/create-article`}>新建文章</Link></Menu.Item>
-            <Menu.Item key="2">修改文章</Menu.Item>
-            <Menu.Item key="3">删除文章</Menu.Item>
+            <Menu.Item key="2"><Link to={`${this.props.match.url}/articles`}>查看文章</Link></Menu.Item>
           </SubMenu>
           <SubMenu key="sub2" title={<span><Icon type="appstore" /><span>活动管理</span></span>}>
             <Menu.Item key="5"><Link to={`${this.props.match.url}/create-activity`}>发布活动</Link></Menu.Item>
-            <Menu.Item key="6">修改活动</Menu.Item>
             <Menu.Item key="7"><Link to={`${this.props.match.url}/activities`}>查看活动</Link></Menu.Item>
           </SubMenu>
           <SubMenu key="sub4" title={<span><Icon type="setting" /><span>招聘管理</span></span>}>
             <Menu.Item key="9"><Link to={`${this.props.match.url}/create-employment`}>发布招聘</Link></Menu.Item>
-            <Menu.Item key="10">修改招聘</Menu.Item>
+            <Menu.Item key="10">编辑招聘</Menu.Item>
             <Menu.Item key="11"><Link to={`${this.props.match.url}/applies`}>查看报名</Link></Menu.Item>
-            <Menu.Item key="12">录用成员</Menu.Item>
           </SubMenu>
           <SubMenu key="sub5" title={<span><Icon type="setting" /><span>社团信息管理</span></span>}>
             <Menu.Item key="11"><Link to={`${this.props.match.url}/update-club-info`}>社团信息编辑</Link></Menu.Item>
@@ -76,6 +75,8 @@ export default class ClubAdminComponent extends React.Component {
         <Route path={`${this.props.match.path}/activities`} component={ActivityList} exact/>
         <Route path={`${this.props.match.path}/activities/:acid/applies`} component={ActivityApply} />
         <Route path={`${this.props.match.path}/activities/:acid/edit`} component={ActivityEdit} exact/>
+        <Route path={`${this.props.match.path}/articles`} component={ArticleList} exact/>
+        <Route path={`${this.props.match.path}/articles/:aid/edit`} component={ArticleEdit} exact/>
         </Col>
         <Col span={4}/>
         </Row>

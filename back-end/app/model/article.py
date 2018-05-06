@@ -26,6 +26,19 @@ class Article(Base):
         db.session.commit()
 
     @classmethod
+    def update(cls, article):
+        cls.query.filter_by(aid=article.aid).update({
+            "title": article.title,
+            "content": article.content,
+        }) 
+        db.session.commit()
+
+    @classmethod
+    def delete(cls, id):
+        cls.query.filter_by(aid=id).delete()
+        db.session.commit()
+
+    @classmethod
     def get_last_by_limit(cls, limit):
         articles = cls.query.filter_by(can_show=1).order_by(desc(cls.date_created)).limit(limit).all()
         return articles
