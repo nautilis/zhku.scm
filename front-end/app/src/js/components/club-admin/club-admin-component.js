@@ -12,6 +12,7 @@ import ApplyList from './apply-list';
 import ActivityPublish from "./activity-publish";
 import ActivityList from "./activity-list";
 import ActivityApply from "./activity-apply";
+import ActivityEdit from "./activity-edit";
 
 export default class ClubAdminComponent extends React.Component {
   constructor() {
@@ -74,6 +75,7 @@ export default class ClubAdminComponent extends React.Component {
         <Route path={`${this.props.match.path}/create-activity`} component={ActivityPublish} exact />
         <Route path={`${this.props.match.path}/activities`} component={ActivityList} exact/>
         <Route path={`${this.props.match.path}/activities/:acid/applies`} component={ActivityApply} />
+        <Route path={`${this.props.match.path}/activities/:acid/edit`} component={ActivityEdit} exact/>
         </Col>
         <Col span={4}/>
         </Row>

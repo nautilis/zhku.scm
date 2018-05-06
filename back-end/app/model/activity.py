@@ -18,6 +18,17 @@ class Activity(Base):
         db.session.commit()
 
     @classmethod
+    def update(cls, activity):
+        cls.query.filter_by(acid=activity.acid).update({
+            "title": activity.title,
+            "content": activity.content,
+            "deadline": activity.deadline,
+            "activity_time": activity.activity_time,
+            "activity_address": activity.activity_address, 
+        })
+        db.session.commit()
+
+    @classmethod
     def get_by_id(cls, id):
         activity = cls.query.filter_by(acid=id).first()
         return activity

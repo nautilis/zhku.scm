@@ -30,12 +30,32 @@ def create(user):
     res = {"message": "创建成功"}
     return jsonify(res)
 
+@activity_api.route("/<int:id>/update", methods=["POST"])
+@logined_token_required
+def update(user, id):
+    data = request.get_data()
+    #print data
+    jobj = json.loads(data)
+
+    activity= Activity()
+    activity.acid = jobj["acid"]
+    activity.title = jobj["title"]
+    activity.content = jobj["content"]
+    activity.deadline = jobj["deadline"]
+    activity.activity_time = jobj["activityTime"]
+    activity.activity_address = jobj["activityAddress"]
+    Activity.update(activity)
+    res = {"message": "已经更新"}
+    return jsonify(res)
+
 @activity_api.route("/<int:id>", methods=["GET"])
 def get_activity(id):
     activity = Activity.get_by_id(id)
     club = Club.find_club_by_id(activity.cid)
     res = {}
     res["activity"] = activity.to_dict()
+    res["activity"]["deadline"] = res["activity"]["deadline"].strftime('%Y-%m-%d') 
+    res["activity"]["activity_time"] = res["activity"]["activity_time"].strftime('%Y-%m-%d') 
     res["activity"]["clubName"] = club.name
     return jsonify(res)
 

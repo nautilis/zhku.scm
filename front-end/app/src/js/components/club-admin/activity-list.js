@@ -28,7 +28,7 @@ export default class ActivityList extends React.Component{
             itemLayout="horizontal"
 
             renderItem={item=>(
-               <List.Item actions={[<a><Button type="primary" >编辑</Button></a>,<Link to={`${this.props.match.url}/${item.acid}/applies`} ><Button type="primary" >查看报名</Button></Link>,<a><Button type="danger" >删除</Button></a>]}>
+               <List.Item actions={[<Link to={`${this.props.match.url}/${item.acid}/edit`}><Button type="primary" >编辑</Button></Link>,<Link to={`${this.props.match.url}/${item.acid}/applies`} ><Button type="primary" >查看报名</Button></Link>,<a><Button type="danger" >删除</Button></a>]}>
                <List.Item.Meta 
                title={item.title}
                description={item.content.substr(0, 40)}
