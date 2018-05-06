@@ -19,6 +19,22 @@ class Employment(Base):
          db.session.commit()
 
      @classmethod
+     def update(cls, employment):
+         cls.query.filter_by(eid=employment.eid).update({
+             "title": employment.title,
+             "content": employment.content,
+             "deadline": employment.deadline,
+             "interview_time": employment.interview_time,
+             "interview_address": employment.interview_address,
+         })
+         db.session.commit()
+
+     @classmethod
+     def delete(cls,eid):
+         cls.query.filter_by(eid=eid).delete()
+         db.session.commit()
+
+     @classmethod
      def get_by_id(cls, id):
          employment = cls.query.filter_by(eid=id).first()
          return employment
@@ -26,4 +42,9 @@ class Employment(Base):
      @classmethod
      def get_employments(cls,limit):
         employments = cls.query.order_by(desc(cls.date_created)).limit(limit).all()
+        return employments
+
+     @classmethod
+     def get_all_employments_of_club(cls, cid):
+        employments = cls.query.filter_by(cid=cid).order_by(desc(cls.date_created)).all()
         return employments

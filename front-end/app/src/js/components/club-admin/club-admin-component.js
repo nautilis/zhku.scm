@@ -12,9 +12,11 @@ import ApplyList from './apply-list';
 import ActivityPublish from "./activity-publish";
 import ActivityList from "./activity-list";
 import ArticleList from "./article-list";
+import EmploymentList from "./employment-list";
 import ActivityApply from "./activity-apply";
 import ActivityEdit from "./activity-edit";
 import ArticleEdit from "./article-edit";
+import EmploymentEidt from "./employment-edit";
 
 export default class ClubAdminComponent extends React.Component {
   constructor() {
@@ -56,7 +58,7 @@ export default class ClubAdminComponent extends React.Component {
           </SubMenu>
           <SubMenu key="sub4" title={<span><Icon type="setting" /><span>招聘管理</span></span>}>
             <Menu.Item key="9"><Link to={`${this.props.match.url}/create-employment`}>发布招聘</Link></Menu.Item>
-            <Menu.Item key="10">编辑招聘</Menu.Item>
+            <Menu.Item key="10"><Link to={`${this.props.match.url}/employments`}>编辑招聘</Link></Menu.Item>
             <Menu.Item key="11"><Link to={`${this.props.match.url}/applies`}>查看报名</Link></Menu.Item>
           </SubMenu>
           <SubMenu key="sub5" title={<span><Icon type="setting" /><span>社团信息管理</span></span>}>
@@ -77,6 +79,8 @@ export default class ClubAdminComponent extends React.Component {
         <Route path={`${this.props.match.path}/activities/:acid/edit`} component={ActivityEdit} exact/>
         <Route path={`${this.props.match.path}/articles`} component={ArticleList} exact/>
         <Route path={`${this.props.match.path}/articles/:aid/edit`} component={ArticleEdit} exact/>
+        <Route path={`${this.props.match.path}/employments`} component={EmploymentList} exact />
+        <Route path={`${this.props.match.path}/employments/:eid/edit`} component={EmploymentEidt} exact />
         </Col>
         <Col span={4}/>
         </Row>

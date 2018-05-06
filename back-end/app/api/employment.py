@@ -31,6 +31,33 @@ def create_employment(user):
     res = {"error": "0", "message": "成功发布招聘", "status": "ok"}
     return (jsonify(res))
 
+@employment_api.route("/<int:eid>/update", methods=["POST"])
+@logined_token_required
+def update(user,eid):
+    data = request.get_data()
+    #print data
+    jobj = json.loads(data)
+
+    employment = Employment()
+    employment.title = jobj["title"]
+    employment.content = jobj["content"]
+    employment.deadline = jobj["deadline"]
+    employment.interview_time = jobj["interviewTime"]
+    employment.interview_address = jobj["interviewAddress"]
+    employment.eid = eid
+
+    Employment.update(employment)
+    res = {"message": "更新成功"}
+    return jsonify(res)
+
+@employment_api.route("/<int:eid>/delete", methods=["POST"])
+@logined_token_required
+def delete(user, eid):
+    Employment.delete(eid)
+    res = {"message": "已删除"}
+    return jsonify(res)
+
+
 @employment_api.route("/upload-resume", methods=["POST"])
 @logined_token_required
 def upload_resume(user):
@@ -55,6 +82,8 @@ def get_employment(id):
     print employment
     res  = {}
     res["employment"] = employment.to_dict()
+    res["employment"]["deadline"] = res["employment"]["deadline"].strftime("%Y-%m-%d")
+    res["employment"]['interview_time'] = res["employment"]['interview_time'].strftime("%Y-%m-%d")
     res["employment"]["clubName"] = club.name
     return jsonify(res)
 

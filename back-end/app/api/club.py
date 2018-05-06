@@ -2,6 +2,7 @@
 from flask import request, jsonify, Blueprint
 from app.model.club import Club
 from app.model.article import Article
+from app.model.employment import Employment
 club_api = Blueprint('club_api', __name__)
 import json
 from app.helps.somedangerous import get_token, logined_token_required
@@ -85,4 +86,14 @@ def get_all_article(cid):
         res["articles"].append(article.to_dict())
 
     return jsonify(res)    
+
+@club_api.route("/<int:cid>/employments", methods=["GET"])
+def get_all_employments(cid):
+    employments = Employment.get_all_employments_of_club(cid)
+    res = {}
+    res["employments"] = []
+    for e in employments:
+        res["employments"].append(e.to_dict())
+    return jsonify(res)
+
 
