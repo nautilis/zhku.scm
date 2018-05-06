@@ -48,6 +48,13 @@ def update(user, id):
     res = {"message": "已经更新"}
     return jsonify(res)
 
+@activity_api.route("/<int:id>/delete", methods=["POST"])
+@logined_token_required
+def delete(user, id):
+    Activity.delete(id)
+    res = {"message": "删除成功"}
+    return jsonify(res)
+
 @activity_api.route("/<int:id>", methods=["GET"])
 def get_activity(id):
     activity = Activity.get_by_id(id)

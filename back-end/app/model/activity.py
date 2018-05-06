@@ -29,6 +29,11 @@ class Activity(Base):
         db.session.commit()
 
     @classmethod
+    def delete(cls, id):
+        cls.query.filter_by(acid=id).delete()
+        db.session.commit()
+
+    @classmethod
     def get_by_id(cls, id):
         activity = cls.query.filter_by(acid=id).first()
         return activity

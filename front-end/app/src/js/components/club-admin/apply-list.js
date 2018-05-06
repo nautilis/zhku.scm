@@ -16,6 +16,7 @@ export default class ApplyList extends React.Component{
         myfetch("GET", `http://127.0.0.1:5000/api/v1/apply/${apid}/accept?token=${this.state.token}`, null).then(json =>{
             console.log(json);
             message.success(json.message);
+            this.componentDidMount()
         })
     }
     handleReject(apid){
@@ -23,6 +24,7 @@ export default class ApplyList extends React.Component{
         myfetch("GET", `http://127.0.0.1:5000/api/v1/apply/${apid}/reject?token=${this.state.token}`, null).then(json =>{
             console.log(json);
             message.success(json.message);
+            this.componentDidMount()
         })
 
     }

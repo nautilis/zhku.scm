@@ -21,6 +21,14 @@ export default class ActivityList extends React.Component{
         })
     }
 
+    deleteActivity(acid){
+        console.log(acid)
+        myfetch("POST", `http://127.0.0.1:5000/api/v1/activity/${acid}/delete?token=${this.state.token}`, null).then(json=>{
+            message.success(json.message);
+            this.componentDidMount();
+        })
+    }
+
     render(){
         return(
             <List
@@ -28,7 +36,7 @@ export default class ActivityList extends React.Component{
             itemLayout="horizontal"
 
             renderItem={item=>(
-               <List.Item actions={[<Link to={`${this.props.match.url}/${item.acid}/edit`}><Button type="primary" >编辑</Button></Link>,<Link to={`${this.props.match.url}/${item.acid}/applies`} ><Button type="primary" >查看报名</Button></Link>,<a><Button type="danger" >删除</Button></a>]}>
+               <List.Item actions={[<Link to={`${this.props.match.url}/${item.acid}/edit`}><Button type="primary" >编辑</Button></Link>,<Link to={`${this.props.match.url}/${item.acid}/applies`} ><Button type="primary" >查看报名</Button></Link>,<a><Button onClick={this.deleteActivity.bind(this,item.acid)} type="danger" >删除</Button></a>]}>
                <List.Item.Meta 
                title={item.title}
                description={item.content.substr(0, 40)}
